@@ -3,22 +3,20 @@ package com.plcoding.jetpackcomposepokedex.pokemonDetail
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
-import com.plcoding.jetpackcomposepokedex.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -31,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.coil.CoilImage
+import com.plcoding.jetpackcomposepokedex.R
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Pokemon
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Type
 import com.plcoding.jetpackcomposepokedex.util.Resource
@@ -52,6 +51,7 @@ fun PokemonDetailScreen(
     val pokemonInfo = produceState<Resource<Pokemon>>(initialValue = Resource.Loading()){
         value = viewModel.getPokemonInfo(pokemonName)
     }.value
+
     Box(modifier = Modifier
         .fillMaxSize()
         .background(dominantColor)
@@ -96,7 +96,7 @@ fun PokemonDetailScreen(
                 pokemonInfo.data?.sprites?.let{
                     CoilImage(
                         data = it.front_default,
-                        contentDescription = pokemonInfo.data?.name,
+                        contentDescription = pokemonInfo.data.name,
                         fadeIn = true,
                         modifier = Modifier
                             .size(pokemonImageSize)

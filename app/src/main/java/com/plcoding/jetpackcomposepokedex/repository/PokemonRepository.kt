@@ -9,10 +9,10 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @ActivityScoped
-class PokemonRepository @Inject constructor(
-    private val api : PokeApi
+open class PokemonRepository @Inject constructor(
+    val api : PokeApi
 ){
-    suspend fun getPokemonList(limit : Int, offset : Int) : Resource<PokemonList>{
+    open suspend fun getPokemonList(limit : Int, offset : Int) : Resource<PokemonList>{
         val response = try {
             api.getPokemonList(limit,offset)
         }catch (e : Exception){
@@ -21,7 +21,7 @@ class PokemonRepository @Inject constructor(
         return Resource.Sucess(response)
     }
 
-    suspend fun getPokemonInfo(pokemonName: String) : Resource<Pokemon>{
+    open suspend fun getPokemonInfo(pokemonName: String) : Resource<Pokemon>{
         val response = try {
             api.getPokemonInfo(pokemonName)
         }catch (e : Exception){
