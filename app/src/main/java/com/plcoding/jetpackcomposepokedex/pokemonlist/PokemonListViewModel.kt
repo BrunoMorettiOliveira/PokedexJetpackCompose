@@ -44,7 +44,7 @@ class PokemonListViewModel @Inject constructor(
         }else{
             cachedPokemonList
         }
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(){
             if(query.isEmpty()){
                 pokemonList.value = cachedPokemonList
                 isSearching.value = false
@@ -65,7 +65,7 @@ class PokemonListViewModel @Inject constructor(
 
 
     fun loadPokemonPaginated(){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch() {
             isLoading.value = true
             val result = repository.getPokemonList(PAGE_SIZE, curPage * PAGE_SIZE)
             when(result){
