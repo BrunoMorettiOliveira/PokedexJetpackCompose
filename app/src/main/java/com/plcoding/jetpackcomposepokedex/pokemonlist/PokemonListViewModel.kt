@@ -3,10 +3,10 @@ package com.plcoding.jetpackcomposepokedex.pokemonlist
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.palette.graphics.Palette
 import com.plcoding.jetpackcomposepokedex.data.models.PokedexListEntry
 import com.plcoding.jetpackcomposepokedex.repository.PokemonRepository
@@ -79,13 +79,13 @@ class PokemonListViewModel @Inject constructor(
 
                     }
                     val url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png"
-                    PokedexListEntry(entry.name.capitalize(Locale.ROOT),url,number.toInt())
+                     PokedexListEntry(entry.name.capitalize(Locale.ROOT),url,number.toInt())
                     }
                     curPage++
 
                     loadError.value = ""
                     isLoading.value = false
-                    pokemonList.value += pokedexEntries
+                    pokemonList.value = pokedexEntries
                 }
                 is Resource.Error<*> -> {
                     loadError.value = result.message!!

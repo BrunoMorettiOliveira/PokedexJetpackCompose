@@ -66,7 +66,7 @@ class SplashActivity : AppCompatActivity() {
                 )
             )
 
-            delay(1500L)
+            delay(800L)
             scaleLogo.animateTo(
                 targetValue = 0f,
                 animationSpec = tween(

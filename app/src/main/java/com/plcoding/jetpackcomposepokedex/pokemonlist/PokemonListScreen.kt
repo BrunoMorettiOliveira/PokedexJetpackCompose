@@ -3,9 +3,7 @@ package com.plcoding.jetpackcomposepokedex.pokemonlist
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -25,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -72,6 +71,7 @@ fun PokemonListScreen(
                     .scale(scaleLogo.value)
                     .fillMaxWidth()
                     .align(CenterHorizontally)
+                    .testTag("Logo")
             )
             SearchBar(
                 hint = "Search...",
@@ -82,7 +82,7 @@ fun PokemonListScreen(
                 viewModel.searchPokemonList(it)
             }
             Spacer(modifier = Modifier.height(16.dp))
-            PokemonList(navController = navController)
+            PokemonList(navController = navController, viewModel)
         }
     }
 }
@@ -116,6 +116,7 @@ fun SearchBar(
                 .onFocusChanged {
                     isHintDisplayed = !((FocusState.Active == it) || text.isNotEmpty())
                 }
+                .testTag("SearchBar")
         )
         if (isHintDisplayed) {
             Text(
@@ -131,7 +132,7 @@ fun SearchBar(
 @Composable
 fun PokemonList(
     navController: NavController,
-    viewModel: PokemonListViewModel = hiltNavGraphViewModel()
+    viewModel: PokemonListViewModel
 ) {
     val pokemonList by remember {
         viewModel.pokemonList
@@ -149,7 +150,7 @@ fun PokemonList(
         viewModel.isSearching
     }
 
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
+    LazyColumn(contentPadding = PaddingValues(16.dp)){
         val itemCount = if (pokemonList.size % 2 == 0) {
             pokemonList.size / 2
         } else {
@@ -204,6 +205,7 @@ fun PokedexEntry(
                     )
                 )
             )
+            .testTag("BoxClick" + entry.number.toString())
             .clickable {
                 navController.navigate(
                     "pokemon_detail_screen/${dominantColor.toArgb()}/${entry.pokemonName}"
@@ -246,7 +248,7 @@ fun PokedexRow(
     navController: NavController
 ) {
     Column {
-        Row {
+        Row{
             PokedexEntry(
                 entry = entries[rowIndex * 2], navController = navController,
                 modifier = Modifier.weight(1f)
@@ -270,12 +272,14 @@ fun RetrySection(
     error: String,
     onRetry: () -> Unit
 ) {
-    Column {
+    Column(modifier = Modifier.testTag("BoxError")) {
         Text(error, color = Color.Red, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = { onRetry() },
-            modifier = Modifier.align(CenterHorizontally)
+            modifier = Modifier
+                .align(CenterHorizontally)
+                .testTag("ButtonError")
         ) {
             Text(text = "Retry")
         }

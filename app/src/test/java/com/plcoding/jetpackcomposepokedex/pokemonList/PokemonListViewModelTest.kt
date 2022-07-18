@@ -21,7 +21,7 @@ import org.mockito.Mock
 
 class PokemonListViewModelTest {
 
-    @get:Rule
+    @get:Rule()
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: PokemonListViewModel
@@ -102,7 +102,7 @@ class PokemonListViewModelTest {
 }
 
 private var pokemonListMock = PokemonList(
-    1154, "https://pokeapi.co/api/v2/pokemon/?offset=1&limit=1", String(), listOf(
+    1154, "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1", String(), listOf(
         Result("bulbasaur", "https://pokeapi.co/api/v2/pokemon/1/")
     )
 )

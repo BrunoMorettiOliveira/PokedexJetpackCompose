@@ -1,0 +1,4 @@
+package com.plcoding.jetpackcomposepokedex.pokemonDetail
+
+
+internal class PokemonDetailViewModelTest
