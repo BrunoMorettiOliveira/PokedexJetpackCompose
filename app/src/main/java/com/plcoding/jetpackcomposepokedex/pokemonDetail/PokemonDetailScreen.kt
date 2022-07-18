@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -101,6 +102,7 @@ fun PokemonDetailScreen(
                         modifier = Modifier
                             .size(pokemonImageSize)
                             .offset(y = topPadding)
+                            .testTag("ImagePokemon")
 
                     )
                 }
@@ -133,6 +135,7 @@ fun PokemonDetailTopSection(
             modifier = Modifier
                 .size(36.dp)
                 .offset(16.dp, 16.dp)
+                .testTag("ArrowBack")
                 .clickable {
                     navController.popBackStack()
                 }
@@ -183,13 +186,15 @@ fun PokemonDetailSection(
             .fillMaxSize()
             .offset(y = 100.dp)
             .verticalScroll(scrollState)
+            .testTag("DetailBox")
     ) {
         Text(
             text = "#${pokemonInfo.id} ${pokemonInfo.name.capitalize(Locale.ROOT)}",
             fontWeight = FontWeight.Bold,
             fontSize = 30.sp,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.testTag("PokemonName")
         )
         PokemonTypeSection(types = pokemonInfo.types)
         PokemonDetailDataSection(pokemonWeight = pokemonInfo.weight, pokemonHeight = pokemonInfo.height)
@@ -201,7 +206,7 @@ fun PokemonDetailSection(
 fun PokemonTypeSection(types : List<Type>){
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(16.dp).testTag("Types")
     ){
         for(type in types){
             Box(
@@ -246,7 +251,7 @@ fun PokemonDetailDataSection(
             dataValue = pokemonWeightInKg,
             dataUnit = "kg",
             dataIcon = painterResource(id = R.drawable.ic_weight),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f).testTag("Weigth")
         )
         Spacer(modifier = Modifier
             .size(1.dp, sectionHeight)
@@ -256,7 +261,7 @@ fun PokemonDetailDataSection(
             dataValue = pokemonHeightInMeters,
             dataUnit = "m",
             dataIcon = painterResource(id = R.drawable.ic_height),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f).testTag("Height")
         )
     }
 }
@@ -312,6 +317,7 @@ fun PokemonStat(
             .fillMaxWidth()
             .height(height)
             .clip(CircleShape)
+            .testTag("Stat"+statName.toString())
             .background(
                 if (isSystemInDarkTheme()) {
                     Color(0xFF505050)
@@ -356,7 +362,8 @@ fun PokemonBaseStats(
         Text(
             text = "Base stats",
             fontSize = 20.sp,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.testTag("BaseStatText")
         )
         Spacer(
             modifier = Modifier.height(4.dp)
