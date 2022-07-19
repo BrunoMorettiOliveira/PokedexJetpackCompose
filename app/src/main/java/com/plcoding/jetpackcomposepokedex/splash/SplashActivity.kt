@@ -1,9 +1,6 @@
 package com.plcoding.jetpackcomposepokedex.splash
 
-import android.os.Bundle
-import android.view.MotionEvent
 import android.view.animation.OvershootInterpolator
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -19,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,7 +80,7 @@ class SplashActivity : AppCompatActivity() {
         }
         Surface(
             color = MaterialTheme.colors.background,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().testTag("BackGround")
         ) {
 
             Box(
@@ -96,7 +94,8 @@ class SplashActivity : AppCompatActivity() {
                         .scale(scaleLogo.value)
                         .width(screenWidth / scaleLogoDiv)
                         .height(screenHeight / scaleLogoDiv)
-                        .offset(y = screenHeight/10),
+                        .offset(y = screenHeight/10)
+                        .testTag("Logo"),
                     contentDescription = "splash_logo"
                 )
             }
@@ -114,6 +113,7 @@ class SplashActivity : AppCompatActivity() {
                         .scale(scaleLoading.value)
                         .width(screenWidth / scaleLoadingDiv)
                         .height(screenHeight / scaleLoadingDiv)
+                        .testTag("CircularLoading")
                 )
 
             }

@@ -1,10 +1,5 @@
 package com.plcoding.jetpackcomposepokedex.pokemonDetail
 
-import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
@@ -227,6 +222,62 @@ class PokemonDetailScreenKtTest {
             .assertIsEnabled()
             .assertIsDisplayed()
     }
+
+    @Test
+    fun ErrorTest() {
+        composeTestRule.setContent {
+            JetpackComposePokedexTheme {
+                val navController = rememberNavController()
+                PokemonDetailScreen(
+                    navController = navController,
+                    viewModel = viewModelError,
+                    dominantColor = Color.Green,
+                    topPadding = 20.dp,
+                    pokemonImageSize = 200.dp,
+                    pokemonName = "bulbasaur"
+                )
+            }
+        }
+        composeTestRule.onNode(hasTestTag("BaseStatText"),true)
+            .assertDoesNotExist()
+
+
+        composeTestRule.onNode(hasTestTag("StatHP"),true)
+            .assertDoesNotExist()
+
+        composeTestRule.onNode(hasTestTag("StatAtk"),true)
+            .assertDoesNotExist()
+
+
+        composeTestRule.onNode(hasTestTag("StatDef"),true)
+            .assertDoesNotExist()
+
+
+        composeTestRule.onNode(hasTestTag("StatSpAtk"),true)
+            .assertDoesNotExist()
+
+        composeTestRule.onNode(hasTestTag("StatSpDef"),true)
+            .assertDoesNotExist()
+
+        composeTestRule.onNode(hasTestTag("StatSpd"),true)
+            .assertDoesNotExist()
+
+        composeTestRule.onNode(hasTestTag("Weigth"),true)
+            .assertDoesNotExist()
+
+
+        composeTestRule.onNode(hasTestTag("Height"),true)
+            .assertDoesNotExist()
+
+
+        composeTestRule.onNode(hasTestTag("Types"),true)
+            .assertDoesNotExist()
+
+        composeTestRule.onNode(hasTestTag("Error"), true)
+            .assertIsEnabled()
+            .assertIsDisplayed()
+    }
+
 
 
 

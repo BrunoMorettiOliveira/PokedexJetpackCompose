@@ -162,7 +162,7 @@ fun PokemonDetailStateWrapper(
             Text(
                 text = pokemonInfo.message!!,
                 color = Color.Red,
-                modifier = modifier
+                modifier = modifier.testTag("Error")
             )
         }
         is Resource.Loading -> {
