@@ -3,8 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id("pl.droidsonroids.pitest")
 }
-
 android {
 
 
@@ -128,18 +128,12 @@ dependencies {
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+pitest {
+    targetClasses = ['com.plcoding.jetpackcomposepokedex.*']
+    threads = 6
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = true
+}
+
+

@@ -1,4 +1,4 @@
-package com.plcoding.jetpackcomposepokedex.pokemonDetail
+package com.plcoding.jetpackcomposepokedex.pokemonDetail.di
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock

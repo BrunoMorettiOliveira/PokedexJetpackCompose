@@ -39,7 +39,6 @@ class PokemonListScreenKtTest {
         composeTestRule.setContent {
             JetpackComposePokedexTheme {
                 val navController = rememberNavController()
-
                 PokemonListScreen(navController = navController, viewModelSucess)
             }
         }
