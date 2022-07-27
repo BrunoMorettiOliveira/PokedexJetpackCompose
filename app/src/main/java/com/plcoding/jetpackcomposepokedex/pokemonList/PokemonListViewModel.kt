@@ -1,9 +1,8 @@
-package com.plcoding.jetpackcomposepokedex.pokemonlist
+package com.plcoding.jetpackcomposepokedex.pokemonList
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.*
@@ -13,7 +12,6 @@ import com.plcoding.jetpackcomposepokedex.repository.PokemonRepository
 import com.plcoding.jetpackcomposepokedex.util.Constants.PAGE_SIZE
 import com.plcoding.jetpackcomposepokedex.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -52,8 +50,7 @@ class PokemonListViewModel @Inject constructor(
                 return@launch
             }
             val results = listToSearch.filter{
-                it.pokemonName.contains(query.trim(), ignoreCase = true) ||
-                        it.number.toString() == query.trim()
+                it.pokemonName.contains(query.trim().trimEnd(), ignoreCase = true)
             }
             if(isSearchStarting) {
                 cachedPokemonList = pokemonList.value

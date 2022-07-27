@@ -1,6 +1,11 @@
 package com.plcoding.jetpackcomposepokedex.splash
 
+import android.content.Intent
+import android.os.Bundle
+import android.view.WindowManager
 import android.view.animation.OvershootInterpolator
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -21,17 +26,51 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
+import com.plcoding.jetpackcomposepokedex.MainActivity
 import com.plcoding.jetpackcomposepokedex.R
+import com.plcoding.jetpackcomposepokedex.ui.theme.JetpackComposePokedexTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.LaunchedEffect as LaunchedEffect1
 
+@AndroidEntryPoint
+class SplashActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            JetpackComposePokedexTheme {
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "splash_screen"
+                ) {
+                    composable("pokemon_list_screen") {
+                        startActivity(
+                            Intent(
+                                this@SplashActivity,
+                                MainActivity::class.java
+                            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        )
+                    }
+                    composable(route = "splash_screen") {
+                        splashScreen(navController = navController)
+                    }
 
-class SplashActivity : AppCompatActivity() {
+                }
+            }
+
+        }
+    }
+
     @Composable
     fun splashScreen(
         navController: NavController,
         ) {
+        lockScreen(true)
         val configuration = LocalConfiguration.current
         val screenHeight = configuration.screenHeightDp.dp
         val screenWidth = configuration.screenWidthDp.dp
@@ -75,7 +114,7 @@ class SplashActivity : AppCompatActivity() {
             ))
 
             navController.navigate("pokemon_list_screen")
-            this@SplashActivity.finish()
+            lockScreen(true)
 
         }
         Surface(
@@ -118,6 +157,24 @@ class SplashActivity : AppCompatActivity() {
 
             }
 
+        }
+    }
+
+    private fun lockScreen(
+        isLocked: Boolean
+    ) {
+        if (isLocked) {
+            this@SplashActivity.window.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            )
+            this@SplashActivity.window.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+            )
+        } else {
+            this@SplashActivity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            this@SplashActivity.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }
     }
 

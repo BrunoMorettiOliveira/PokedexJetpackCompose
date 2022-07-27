@@ -1,11 +1,13 @@
-package com.plcoding.jetpackcomposepokedex.pokemonlist
+package com.plcoding.jetpackcomposepokedex.pokemonListTestInstrumented
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.rememberNavController
 import com.plcoding.jetpackcomposepokedex.MainActivity
-import com.plcoding.jetpackcomposepokedex.pokemonlist.di.FakeErrorDataRepoImpl
-import com.plcoding.jetpackcomposepokedex.pokemonlist.di.FakeSucessDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonList.PokemonListScreen
+import com.plcoding.jetpackcomposepokedex.pokemonList.PokemonListViewModel
+import com.plcoding.jetpackcomposepokedex.pokemonListTestInstrumented.di.FakeErrorDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonListTestInstrumented.di.FakeSucessDataRepoImpl
 import com.plcoding.jetpackcomposepokedex.ui.theme.JetpackComposePokedexTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -55,8 +57,14 @@ class PokemonListScreenKtTest {
                 PokemonListScreen(navController = navController, viewModelSucess)
             }
         }
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
 
+        composeTestRule.waitUntil(1000000) {
+            composeTestRule.onAllNodesWithTag("BoxClick2").fetchSemanticsNodes().isEmpty()
+        }
         composeTestRule.onNode(hasTestTag("BoxClick1"), true)
             .assertIsEnabled()
             .assertIsDisplayed()
@@ -84,6 +92,9 @@ class PokemonListScreenKtTest {
                 PokemonListScreen(navController = navController, viewModelSucess)
             }
         }
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("dragonite")
+        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("dragonite")
 
         composeTestRule.onNode(hasTestTag("BoxClick1"), true)
@@ -99,7 +110,7 @@ class PokemonListScreenKtTest {
             }
         }
 
-        composeTestRule.onNode(hasTestTag("Logo"), true)
+        composeTestRule.onNode(hasTestTag("LogoListScreen"), true)
             .assertIsEnabled()
             .assertIsDisplayed()
     }

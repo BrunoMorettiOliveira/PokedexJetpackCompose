@@ -1,8 +1,9 @@
-package com.plcoding.jetpackcomposepokedex.pokemonDetail
+package com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.plcoding.jetpackcomposepokedex.pokemonDetail.di.FakeErrorDataRepoImpl
-import com.plcoding.jetpackcomposepokedex.pokemonDetail.di.FakeSucessDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonDetail.PokemonDetailViewModel
+import com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented.di.FakeErrorDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented.di.FakeSucessDataRepoImpl
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.resetMain

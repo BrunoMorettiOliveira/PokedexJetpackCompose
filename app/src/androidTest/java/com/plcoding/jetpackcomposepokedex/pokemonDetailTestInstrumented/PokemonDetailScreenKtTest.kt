@@ -1,4 +1,4 @@
-package com.plcoding.jetpackcomposepokedex.pokemonDetail
+package com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.assertHasClickAction
@@ -9,8 +9,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.plcoding.jetpackcomposepokedex.MainActivity
-import com.plcoding.jetpackcomposepokedex.pokemonDetail.di.FakeErrorDataRepoImpl
-import com.plcoding.jetpackcomposepokedex.pokemonDetail.di.FakeSucessDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonDetail.PokemonDetailScreen
+import com.plcoding.jetpackcomposepokedex.pokemonDetail.PokemonDetailViewModel
+import com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented.di.FakeErrorDataRepoImpl
+import com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented.di.FakeSucessDataRepoImpl
 import com.plcoding.jetpackcomposepokedex.ui.theme.JetpackComposePokedexTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

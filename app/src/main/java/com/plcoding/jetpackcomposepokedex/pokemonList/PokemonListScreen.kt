@@ -1,4 +1,4 @@
-package com.plcoding.jetpackcomposepokedex.pokemonlist
+package com.plcoding.jetpackcomposepokedex.pokemonList
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -71,7 +71,7 @@ fun PokemonListScreen(
                     .scale(scaleLogo.value)
                     .fillMaxWidth()
                     .align(CenterHorizontally)
-                    .testTag("Logo")
+                    .testTag("LogoListScreen")
             )
             SearchBar(
                 hint = "Search...",
@@ -113,10 +113,11 @@ fun SearchBar(
                 .shadow(5.dp, CircleShape)
                 .background(Color.White, CircleShape)
                 .padding(horizontal = 20.dp, vertical = 12.dp)
+                .testTag("SearchBar")
                 .onFocusChanged {
                     isHintDisplayed = !((FocusState.Active == it) || text.isNotEmpty())
                 }
-                .testTag("SearchBar")
+
         )
         if (isHintDisplayed) {
             Text(

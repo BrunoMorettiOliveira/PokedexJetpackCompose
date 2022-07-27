@@ -1,4 +1,4 @@
-package com.plcoding.jetpackcomposepokedex.pokemonList
+package com.plcoding.jetpackcomposepokedex.testUnit.pokemonListTest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
@@ -6,7 +6,7 @@ import com.plcoding.jetpackcomposepokedex.data.models.PokedexListEntry
 import com.plcoding.jetpackcomposepokedex.data.remote.PokeApi
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.PokemonList
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.Result
-import com.plcoding.jetpackcomposepokedex.pokemonlist.PokemonListViewModel
+import com.plcoding.jetpackcomposepokedex.pokemonList.PokemonListViewModel
 import com.plcoding.jetpackcomposepokedex.repository.PokemonRepository
 import com.plcoding.jetpackcomposepokedex.util.Resource
 import junit.framework.Assert.assertEquals
