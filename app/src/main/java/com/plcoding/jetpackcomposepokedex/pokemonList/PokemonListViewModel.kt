@@ -50,7 +50,8 @@ class PokemonListViewModel @Inject constructor(
                 return@launch
             }
             val results = listToSearch.filter{
-                it.pokemonName.contains(query.trim().trimEnd(), ignoreCase = true)
+                it.pokemonName.contains(query.trim().trimEnd(), ignoreCase = true) ||
+                        it.number.toString() == query.trim().trimEnd()
             }
             if(isSearchStarting) {
                 cachedPokemonList = pokemonList.value

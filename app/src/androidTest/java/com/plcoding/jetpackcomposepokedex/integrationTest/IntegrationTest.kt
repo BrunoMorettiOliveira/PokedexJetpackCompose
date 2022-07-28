@@ -31,8 +31,6 @@ class IntegrationTest {
         }
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("ditto")
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("ditto")
         composeTestRule.onNode(hasTestTag("BoxClick132"), true)
             .performClick()
         composeTestRule.waitUntil(1000000) {
@@ -48,8 +46,6 @@ class IntegrationTest {
             composeTestRule.onAllNodesWithTag("BoxClick1").fetchSemanticsNodes().size == 1
         }
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
 
         composeTestRule.onNode(hasTestTag("BoxClick1"), true)

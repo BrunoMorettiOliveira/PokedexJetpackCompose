@@ -59,12 +59,6 @@ class PokemonListScreenKtTest {
         }
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("bulbasaur")
-
-        composeTestRule.waitUntil(1000000) {
-            composeTestRule.onAllNodesWithTag("BoxClick2").fetchSemanticsNodes().isEmpty()
-        }
         composeTestRule.onNode(hasTestTag("BoxClick1"), true)
             .assertIsEnabled()
             .assertIsDisplayed()
@@ -94,9 +88,6 @@ class PokemonListScreenKtTest {
         }
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performClick()
         composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("dragonite")
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextClearance()
-        composeTestRule.onNode(hasTestTag("SearchBar"), true).performTextInput("dragonite")
-
         composeTestRule.onNode(hasTestTag("BoxClick1"), true)
             .assertDoesNotExist()
     }
@@ -109,7 +100,6 @@ class PokemonListScreenKtTest {
                 PokemonListScreen(navController = navController, viewModelSucess)
             }
         }
-
         composeTestRule.onNode(hasTestTag("LogoListScreen"), true)
             .assertIsEnabled()
             .assertIsDisplayed()

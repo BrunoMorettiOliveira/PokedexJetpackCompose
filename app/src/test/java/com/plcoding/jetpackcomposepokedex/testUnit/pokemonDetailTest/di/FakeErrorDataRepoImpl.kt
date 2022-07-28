@@ -1,4 +1,4 @@
-package com.plcoding.jetpackcomposepokedex.pokemonDetailTestInstrumented.di
+package com.plcoding.jetpackcomposepokedex.testUnit.pokemonDetailTest.di
 
 import com.nhaarman.mockitokotlin2.mock
 import com.plcoding.jetpackcomposepokedex.data.remote.responses.*

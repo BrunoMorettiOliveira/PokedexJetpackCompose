@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-open interface PokeApi {
+interface PokeApi {
 
     @GET("pokemon")
     suspend fun getPokemonList(
